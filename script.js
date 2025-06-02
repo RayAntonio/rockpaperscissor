@@ -5,3 +5,12 @@ function getComputerChoice() {
     return computer_choice;
     
 }
+
+function getHumanChoice(){
+    human_choice = prompt("Rock, paper or scissors?");
+    return human_choice;
+}
+
+
+
+
