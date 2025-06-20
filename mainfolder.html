@@ -1,13 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel= "stylesheet" href = style.css>
     
 </head>
-<script src = "script.js">
-<body>
 
-</body></script>
+<body id = "body">
+
+<div class = button id = "start"> 
+
+  
+
+</div>
+<div id = "Intro">
+
+</div>
+
+ <div id ="menu">  
+<div class = button id = "rock"> </div> 
+<div class = button id = "paper"> </div>
+<div class = button id = "scissor"> </div>
+ </div> 
+
+<div id = "choices">
+ <div id = "playerchoice" ></div>
+ <div id = "computerchoice"></div>
+</div> 
+
+
+<div id ="results">
+    
+</div>
+
+<div id = "score">
+
+</div>
+<div id = "winner"> 
+
+</div>
+
+<div class = button id = "query"> </div>
+<div class = button id = "quit"> </div>
+<script>
+   
+    let i = 0;
+    let player_win = 0;
+    let computer_win = 0
+
+    
+    const rock_btn = document.querySelector("#rock")
+      const paper_btn = document.querySelector("#paper")
+      const scissor_btn = document.querySelector("#scissor")
+
+      const rock_btn_text = document.createElement("button")
+      const paper_btn_text = document.createElement("button")
+      const scissors_btn_text = document.createElement("button")
+
+      rock_btn_text.id = "rock"
+      paper_btn_text.id = "paper"
+      scissors_btn_text.id = "scissor"
+
+      rock_btn_text.textContent = "Rock";
+      paper_btn_text.textContent = "Paper";
+      scissors_btn_text.textContent = "Scissors";
+
+
+      const introduction = document.querySelector("#Intro");
+      const introduction_text = document.createElement("div")
+      introduction_text.textContent = "Rock. Paper. Scissors. 5 Rounds. One Winner."
+      
+      
+    
+
+    const menu = document.querySelector("#menu");
+    const start_btn = document.querySelector("#start")
+    const start_btn_text = document.createElement("button");
+    
+    const display = document.querySelector("#results");
+      const score = document.querySelector("#score");
+      const winner_text = document.createElement("div");
+      const score_text = document.createElement("div");
+
+
+    const player_choice = document.querySelector("#playerchoice")
+    const player_choice_text = document.createElement("div")
+
+    const computer_choice = document.querySelector("#computerchoice")
+    const computer_choice_text = document.createElement("div")
+
+    start_screen();
+    function start_screen() {
+      introduction.appendChild(introduction_text);
+      start_btn.appendChild(start_btn_text);
+
+
+    }
+    start_btn_text.textContent = "Start game";
+    
+
+    start.addEventListener('click', (event) => {
+      start_btn.removeChild(start_btn_text);
+      introduction.removeChild(introduction_text);
+      startGame(); 
+      resetGame();
+
+      
+    })
+
+    function startGame() {
+      
+
+      
+
+      rock_btn.appendChild(rock_btn_text);
+      paper_btn.appendChild(paper_btn_text);
+      scissor_btn.appendChild(scissors_btn_text);
+      
+
+
+    }
+
+    menu.addEventListener('click', (event)=> {
+        let target = event.target; 
+
+        
+    
+        switch(target.id) {
+          case 'rock':
+            human_num = 1;
+            player_choice_text.textContent = "You chose: ROCK"
+  
+            break;
+          case 'paper':
+            human_num = 2;
+            player_choice_text.textContent = "You chose: PAPER"
+            break;
+          case 'scissor':
+            human_num = 3;
+            player_choice_text.textContent = "You chose: SCISSORS"
+            break; 
+          
+          default:
+            return;
+        }
+        
+        player_choice.appendChild(player_choice_text);
+        setTimeout(() =>  {
+        player_choice.removeChild(player_choice_text);
+        }, 2000);
+        playRound(human_num);
+        
+        
+    });
+    function resetGame() {
+        
+        player_win = 0;
+        computer_win = 0;
+        
+        startGame();
+    }
+    function getComputerSelection() {
+      let computer_num = Math.floor(Math.random()*3 +1)
+      if (computer_num == 1) {
+        computer_choice_text.textContent = "Computer chose: ROCK"
+
+      }
+      else if (computer_num == 2) {
+        computer_choice_text.textContent = "Computer chose: PAPER"
+
+      }
+      else if (computer_num == 3) {
+        computer_choice_text.textContent = "Computer chose: SCISSORS"
+      }
+
+      computer_choice.appendChild(computer_choice_text)
+      setTimeout(() =>  {
+        computer_choice.removeChild(computer_choice_text);
+        }, 2000);
+
+      return computer_num;
+    }
+    function endGame(computer_win, player_win) {
+
+
+      rock_btn.removeChild(rock_btn_text);
+      paper_btn.removeChild(paper_btn_text);
+      scissor_btn.removeChild(scissors_btn_text);
+        
+        
+        const final_winner = document.querySelector("#winner")
+        const final_winner_text = document.createElement("div")
+        
+        
+        if (computer_win<player_win) {
+            final_winner_text.textContent = "The player has won the game."
+        
+        }
+        else if (computer_win > player_win) {
+            final_winner_text.textContent = "The computer has won the game."
+        }
+        else {
+          final_winner_text.textContent = "Nobody wins lol"
+        }
+        final_winner.appendChild(final_winner_text);
+
+        const play_again = document.querySelector("#query")
+        const play_again_button = document.createElement("button")
+        play_again_button.textContent = "Run it back"
+        play_again.appendChild(play_again_button);
+
+        const quit = document.querySelector("#quit")
+        const quit_button = document.createElement("button")
+        quit_button.textContent = "Quit"
+        quit.appendChild(quit_button);
+
+        play_again.addEventListener('click', (event)=> {
+            play_again.removeChild(play_again_button);
+            final_winner_text.textContent = ''
+            display.appendChild(final_winner_text)
+            
+            score_text.textContent = '';
+            quit.removeChild(quit_button)
+            score.removeChild(score_text);
+            
+            i = 0;
+
+            
+            resetGame();
+            
+        });
+
+        quit.addEventListener('click', (event)=> {
+            play_again.removeChild(play_again_button);
+            quit.removeChild(quit_button);
+            final_winner_text.textContent = ''
+            display.appendChild(final_winner_text)
+            score_text.textContent = '';
+            
+            i = 0;
+
+            score.removeChild(score_text);
+            
+            
+            start_screen();
+            
+        });
+        
+
+    }
+    function playRound(human_num) {
+        
+      rock_btn_text.disabled = true;
+      paper_btn_text.disabled = true;
+      scissors_btn_text.disabled = true;
+     
+      setTimeout(() => {
+        rock_btn_text.disabled = false;
+        paper_btn_text.disabled = false;
+        scissors_btn_text.disabled = false;
+     
+
+      },2000)
+      
+      const computer_num = getComputerSelection();
+
+
+      if (computer_num == human_num){
+        winner_text.textContent = "DRAW";
+        
+      }
+      else if 
+        ((computer_num == 1 && human_num == 3) || 
+                (computer_num == 2 && human_num == 1) ||
+                (computer_num == 3 && human_num ==2))
+                {
+        winner_text.textContent= "THE COMPUTER WINS!"
+        computer_win++;
+
+    }
+      
+      else {
+        winner_text.textContent = "YOU WIN";
+        player_win++;
+        
+
+      }
+    
+    display.appendChild(winner_text)
+    score_text.textContent = "Computer Score: "+computer_win+ " and "+"Player Score: "+player_win; 
+    score.appendChild(score_text);
+
+    setTimeout(() => { 
+        display.removeChild(winner_text)
+    }, 2000);
+
+    i++
+    if(i==5) {
+    endGame(computer_win, player_win);
+}
+    
+
+    
+     }
+    
+    
+    
+
+    </script>
+
+
+
+
+</body>
+
 </html>

@@ -1,0 +1,26 @@
+
+#body {
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+   
+}
+
+#choices {
+    display: flex ;
+    flex-direction: row;
+    height: 200px;
+    width: 400px;
+    justify-content:  space-between;
+    align-items: center;
+
+}
